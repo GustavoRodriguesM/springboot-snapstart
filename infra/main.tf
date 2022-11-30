@@ -45,12 +45,12 @@ resource "aws_lambda_function" "lambda_snapstart" {
   s3_bucket = var.bucket_name
   s3_key    = aws_s3_object.lambda_object_s3.key
 
-  runtime = "correto11"
+  runtime = "java11"
   handler = var.lambda_handler
 
   source_code_hash = data.archive_file.lambda_file.output_base64sha256
 
-  role = var.lambda_exec_role_arn
+  role = local.lambda_exec_role_arn
 }
 
 resource "aws_cloudwatch_log_group" "cw__lambda" {
